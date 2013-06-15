@@ -1,0 +1,26 @@
+#!/bin/bash
+# This deploy hook gets executed after dependencies are resolved and the
+# build hook has been run but before the application has been started back
+# up again.  This script gets executed directly, so it could be python, php,
+# ruby, etc.
+
+if [ ! -d $OPENSHIFT_DATA_DIR/cache ]; then
+    mkdir $OPENSHIFT_DATA_DIR/cache
+fi
+
+if [ ! -d $OPENSHIFT_DATA_DIR/store ]; then
+    mkdir $OPENSHIFT_DATA_DIR/store
+fi
+
+if [ ! -d $OPENSHIFT_DATA_DIR/identities ]; then
+    cp -r $OPENSHIFT_REPO_DIR/.openshift/defaults/identities $OPENSHIFT_DATA_DIR/identities
+    echo "Created new identities directory. Remember to upload an identity file before using SimpleID."
+fi
+
+if [ ! -d $OPENSHIFT_DATA_DIR/config ]; then
+    cp -r $OPENSHIFT_REPO_DIR/.openshift/defaults/config $OPENSHIFT_DATA_DIR/config
+fi
+
+# Set commit to fail if an error code is returned after this point
+set -e
+
