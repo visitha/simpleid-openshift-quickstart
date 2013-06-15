@@ -69,6 +69,12 @@ Security considerations
 Consult the SimpleID documentation for best practices regarding securing your installation.
 
 
+Bugs
+----
+
+To report bugs, please use the [SimpleID trac](http://simpleid.koinic.net/trac).
+
+
 Licensing
 ---------
 
